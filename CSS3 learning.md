@@ -399,7 +399,7 @@ background-color : color;
 > 4. `background-color` 只能设置**一个**。
 
 
-## 第六章 CSS3选择器
+## 第六章 CSS3选择器(上)
 
 ### 6.1 属性选择器
 
@@ -454,6 +454,10 @@ input:not([type="submit"]){
 </form>
 ```
 
+效果为：
+
+![not](./not.png)
+
 ### 6.4 结构性伪类选择器 —— empty
 
 `:empty`选择器表示的就是空。用来选择没有任何内容的元素，这里没有内容指的是一点内容都没有，**哪怕是一个空格**。
@@ -482,6 +486,10 @@ p:empty {
 }​
 ```
 
+效果为：
+
+![empty](./empty.png)
+
 ### 6.5 结构性伪类选择器 —— target
 
 `:target`选择器称为目标选择器，用来匹配文档(页面)的**url的某个标志符的目标元素**。我们先来上个例子，然后再做分析。
@@ -509,6 +517,10 @@ css代码：
   	display:block;
 }
 ```
+
+结果为：
+
+![target](./target.jpg)
 
 分析：
 
@@ -592,6 +604,10 @@ ol > li:first-child{
 }
 ```
 
+效果为：
+
+![first-child](./first-child.png)
+
 ### 6.7 结构性伪类选择器 —— last-child
 
 `:last-child`选择器与`:first-child`选择器作用类似，不同的是`:last-child`选择器选择的是元素的最后一个子元素。
@@ -630,9 +646,13 @@ css代码：
 }
 ```
 
+效果为：
+
+![last-child](./last-child.png)
+
 ### 6.8 结构性伪类选择器 —— nth-child(n)
 
-`:nth-child(n)`选择器用来定位某个父元素的一个或多个特定的子元素。其中`n`是其参数，而且可以是整数值(1,2,3,4)，也可以是表达式(2n+1、-n+5)和关键词(odd、even)，但参数n的起始值始终是1，而不是0。也就是说，参数n的值为0时，选择器将选择不到任何匹配的元素。
+`:nth-child(n)`选择器用来定位某个父元素的一个或多个特定的子元素。其中`n`是其参数，而且可以是整数值(1,2,3,4)，也可以是表达式(2n+1、-n+5)和关键词(odd(奇数)、even（偶数）)，但参数n的起始值始终是1，而不是0。也就是说，参数n的值为0时，选择器将选择不到任何匹配的元素。
 
 > **经验与技巧** &nbsp; &nbsp;当`:nth-child(n)`选择器中的`n`为一个表达式时，其中`n`是从`0`开始计算，当表达式的值为0或小于0的时候，不选择任何匹配的元素。
 
@@ -664,6 +684,10 @@ ol > li:nth-child(2n){
   	background: orange;
 }
 ```
+
+效果为：
+
+![nth-child(n)](./nth-child(n).png)
 
 ### 6.9 结构性伪类选择器 —— nth-last-child(n)
 
@@ -702,6 +726,10 @@ ol > li:nth-last-child(5){
   	background: orange;
 }
 ```
+
+效果为：
+
+![nth-last-child()](./nth-last-child().png)
 
 ### 6.10 first-of-type选择器
 
@@ -743,3 +771,197 @@ css代码：
   	background: orange;
 }
 ```
+
+效果为：
+
+![first-of-type](first-of-type.png)
+
+### 6.11 nth-of-type(n)选择器
+
+`:nth-of-type(n)`选择器和`:nth-child(n)`选择器非常类似，不同的是它只计算父元素中指定的某种类型的子元素。当某个元素中的子元素不单单是同一种类型的子元素时，使用`:nth-of-type(n)`选择器来定位于父元素中某种类型的子元素是非常方便和有用的。在`:nth-of-type(n)`选择器中的`n`和`:nth-child(n)`选择器中的`n`参数也一样，可以是具体的整数，也可以是表达式，还可以是关键词。
+
+示例：
+
+通过`:nth-of-type(2n)`选择器，将容器`div.wrapper`中偶数段数的背景设置为橙色。
+
+html代码：
+
+```html
+<div class="wrapper">
+  	<div>我是一个Div元素</div>
+  	<p>我是一个段落元素</p>
+  	<div>我是一个Div元素</div>
+  	<p>我是一个段落</p>
+  	<div>我是一个Div元素</div>
+  	<p>我是一个段落</p>
+  	<div>我是一个Div元素</div>
+  	<p>我是一个段落</p>
+  	<div>我是一个Div元素</div>
+  	<p>我是一个段落</p>
+  	<div>我是一个Div元素</div>
+  	<p>我是一个段落</p>
+  	<div>我是一个Div元素</div>
+  	<p>我是一个段落</p>
+  	<div>我是一个Div元素</div>
+  	<p>我是一个段落</p>
+</div>
+```
+
+css代码：
+
+```css
+.wrapper > p:nth-of-type(2n){
+  	background: orange;
+}
+```
+
+效果为：
+
+![nth-of-type(n)](./nth-of-type(n).png)
+
+### 6.12 last-of-type 选择器
+
+`:last-of-type`选择器和`:first-of-type`选择器功能是一样的，不同的是他选择是父元素下的某个类型的`最后一个子元素`。
+
+示例：
+
+通过`:last-of-type`选择器，将容器`div.wrapper`中最后一个段落元素背景设置为橙色
+
+html代码：
+
+```html
+<div class="wrapper">
+	<p>我是第一个段落</p>
+	<p>我是第二个段落</p>
+	<p>我是第三个段落</p>
+	<div>我是第一个Div元素</div>
+	<div>我是第二个Div元素</div>
+	<div>我是第三个Div元素</div>
+</div>
+```
+
+css代码
+
+```css
+.wrapper > p:last-of-type {
+	background: orange;
+}
+```
+
+效果图：
+
+![last-of-type](./last-of-type.png)
+
+### 6.13 nth-last-of-type(n)选择器
+
+`:nth-last-of-type(n)`选择器和`:nth-of-type(n)`选择器是一样的，选择父元素中指定的某种子元素类型，但它的起始方向是从最后一个子元素开始，而且它的使用方法类似于上节中介绍的`:nth-last-child(n)`选择器一样。
+
+示例：
+
+通过`:nth-last-of-type(n)`选择器将容器`div.wrapper`中的倒数第三个段落背景设置为橙色。
+
+html代码：
+
+```html
+<div class="wrapper">
+  	<p>我是第一个段落</p>
+  	<p>我是第二个段落</p>
+  	<p>我是第三个段落</p>
+  	<p>我是第四个段落</p>
+  	<p>我是第五个段落</p>
+  	<div>我是一个Div元素</div>
+  	<p>我是第六个段落</p>
+  	<p>我是第七个段落</p>
+</div>
+```
+
+css代码：
+
+```css
+.wrapper > p:nth-last-of-type(3) {
+	background: orange;
+}
+```
+
+结果为：
+
+![nth-last-of-type](./nth-last-of-type.png)
+
+### 6.14 only-child 选择器
+
+`:only-child`选择器选择的是父元素中只有一个子元素，而且只有唯一的一个子元素。也就是说，匹配的元素的父元素中仅有一个子元素，而且是一个`唯一的子元素`。
+
+示例：
+
+通过`:only-child`选择器，来控制仅有一个子元素的背景样式，为了更好的理解，我们这个示例通过对比的方式来向大家演示。
+
+html代码：
+
+```html
+<div class="post">
+  	<p>我是一个段落</p>
+  	<p>我是一个段落</p>
+</div>
+<div class="post">
+  	<p>我是一个段落</p>
+</div>
+```
+
+css代码：
+
+```css
+.post p {
+  	background: green;
+  	color: #fff;
+  	padding: 10px;
+}
+.post p:only-child {
+  	background: orange;
+}
+```
+
+效果为：
+
+![only-child](./only-child.png)
+
+### 6.15 only-of-type 选择器
+
+`:only-of-type`选择器用来选择一个元素是它的父元素的唯一一个相同类型的子元素。这样说或许不太好理解，换一种说法。`:only-of-type`是表示一个元素他有很多个子元素，而其中只有一种类型的子元素是唯一的，使用`:only-of-type`选择器就可以选中这个元素中的唯一一个类型子元素。
+
+示例：
+
+通过`:only-of-type`选择器来修改容器中仅有一个div元素的背景色为橙色。
+
+html 代码：
+
+```html
+<div class="wrapper">
+  	<p>我是一个段落</p>
+  	<p>我是一个段落</p>
+  	<p>我是一个段落</p>
+  	<div>我是一个Div元素</div>
+</div>
+<div class="wrapper">
+  	<div>我是一个Div</div>
+  	<ul>
+  		<li>我是一个列表项</li>
+  	</ul>
+  	<p>我是一个段落</p>
+</div>
+```
+
+css代码：
+
+```css
+.wrapper > div:only-of-type {
+	background: orange;
+}
+```
+
+结果：
+
+![only-of-type](only-of-type.png)
+
+## 第七章 CSS3 选择器(下)
+
+
