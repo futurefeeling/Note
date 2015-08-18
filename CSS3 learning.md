@@ -964,4 +964,337 @@ css代码：
 
 ## 第七章 CSS3 选择器(下)
 
+### 7.1 :enabled 选择器
+
+在Web的表单中，有些表单元素有可用（`:enabled`）和不可用（`:disabled`）状态，比如输入框，密码框，复选框等。在默认情况之下，这些表单元素都处在可用状态。那么我们可以通过伪选择器`:enabled`对这些表单元素设置样式。
+
+示例：
+
+通过`:enabled`选择器，修改文本输入框的边框为2像素的红色边框，并设置它的背景为灰色。
+
+html代码：
+
+```html
+<form action="#">
+  	<div>
+    	<label for="name">Text Input:</label>
+    	<input type="text" name="name" id="name" placeholder="可用输入框"  />
+  	</div>
+   <div>
+    	<label for="name">Text Input:</label>
+    	<input type="text" name="name" id="name" placeholder="禁用输入框"  disabled="disabled" />
+  	</div>
+</form>
+```
+
+css代码：
+
+```css
+div{
+  	margin: 20px;
+}
+input[type="text"]:enabled {
+  	background: #ccc;
+  	border: 2px solid red;
+}
+```
+
+效果图：
+
+![enabled](enabled.png)
+
+### 7.2 :disabeld 选择器
+
+`:disabled`选择器刚好与`:enabled`选择器相反，用来选择不可用表单元素。要正常使用`:disabled`选择器，需要在表单元素的HTML中设置`disabled`属性。
+
+示例：
+
+通过`:disabled`选择器，给不可用输入框设置明显的样式。
+
+html代码：
+
+```html
+<form action="#">
+  	<div>
+    	<input type="text" name="name" id="name" placeholder="我是可用输入框" />
+  	</div>
+  	<div>
+    	<input type="text" name="name" id="name" placeholder="我是不可用输入框" disabled />
+  	</div>
+</form>
+```
+
+css代码：
+
+```css
+form {
+  	margin: 50px;
+}
+div {
+  	margin-bottom: 20px;
+}
+input {
+  	background: #fff;
+  	padding: 10px;
+  	border: 1px solid orange;
+  	border-radius: 3px;
+}
+input[type="text"]:disabled {
+  	background: rgba(0,0,0,.15);
+  	border: 1px solid rgba(0,0,0,.15);
+  	color: rgba(0,0,0,.15);
+}
+```
+
+效果为：
+
+![disabled](./disabled.png)
+
+### 7.3 :checked 选择器
+
+在表单元素中，单选按钮和复选按钮都具有选中和未选中状态。（大家都知道，要覆写这两个按钮默认样式比较困难）。在CSS3中，我们可以通过状态选择器`:checked`配合其他标签实现自定义样式。而`:checked`表示的是选中状态。
+
+示例：
+
+通过`:checked`状态来自定义复选框效果
+
+html代码
+
+```html
+<form action="#">
+  	<div class="wrapper">
+    	<div class="box">
+      		<input type="checkbox" checked="checked" id="usename" /><span>√</span>
+   	 	</div>
+    	<lable for="usename">我是选中状态</lable>
+  	</div>
+  
+  	<div class="wrapper">
+    	<div class="box">
+      		<input type="checkbox"  id="usepwd" /><span>√</span>
+    	</div>
+    	<label for="usepwd">我是未选中状态</label>
+  	</div>
+</form>
+```
+
+css代码：
+
+```css
+form {
+  	border: 1px solid #ccc;
+  	padding: 20px;
+  	width: 300px;
+  	margin: 30px auto;
+}
+
+.wrapper {
+  	margin-bottom: 10px;
+}
+
+.box {
+  	display: inline-block;
+  	width: 20px;
+  	height: 20px;
+  	margin-right: 10px;
+  	position: relative;
+  	border: 2px solid orange;
+  	vertical-align: middle;
+}
+
+.box input {
+  	opacity: 0;
+  	position: absolute;
+  	top:0;
+  	left:0;
+}
+
+.box span {
+  	position: absolute;
+  	top: -10px;
+  	right: 3px;
+  	font-size: 30px;
+  	font-weight: bold;
+  	font-family: Arial;
+ 	-webkit-transform: rotate(30deg);
+  	transform: rotate(30deg);
+  	color: orange;
+}
+
+input[type="checkbox"] + span {
+  	opacity: 0;
+}
+
+input[type="checkbox"]:checked + span {
+  	opacity: 1;
+}
+```
+
+效果为：
+
+![check](./check.png)
+
+### 7.4 ::selection 选择器
+
+`::selection`伪元素是用来匹配`突出显示`的文本(用鼠标选择文本时的文本)。浏览器默认情况下，`用鼠标选择`网页文本是以“深蓝的背景，白色的字体”显示的，效果如下图所示
+
+![selection-pic](./selection-pic.jpg)
+
+有的时候设计要求,不使用上图那种浏览器默认的突出文本效果，需要一个与众不同的效果，此时`::selection`伪元素就非常的实用。不过在Firefox浏览器还需要添加前缀。
+
+示例：
+
+通过`::selection`选择器，将Web中选中的文本背景变成红色，文本变成绿色。
+
+html代码：
+
+```html
+<p>“::selection”伪元素是用来匹配突出显示的文本。浏览器默认情况下，选择网站文本是深蓝的背景，白色的字体，</p>
+```
+
+```css
+::-moz-selection {
+  	background: red;
+  	color: green;
+}
+::selection {
+  	background: red;
+  	color: green;
+}
+```
+
+效果图为：
+
+![selection](selection.jpg)
+
+### 7.5 :read-only 选择器
+
+`:read-only`伪类选择器用来指定处于只读状态元素的样式。简单点理解就是，元素中设置了`readonly=’readonly’`
+
+示例：
+
+通过`:read-only`选择器来设置地址文本框的样式。
+
+```html
+<form action="#">
+  	<div>
+    	<label for="name">姓名:</label>
+    	<input type="text" name="name" id="name" placeholder="大漠" />
+  	</div>
+  	<div>
+    	<label for="address">地址:</label>
+    	<input type="text" name="address" id="address" placeholder="中国上海" readonly="readonly" />
+  	</div>
+</form>
+```
+
+```css
+form {
+  	width: 300px;
+  	padding: 10px;
+  	border: 1px solid #ccc;
+  	margin: 50px auto;
+}
+form > div {
+  	margin-bottom: 10px;
+}
+
+input[type="text"]{
+  	border: 1px solid orange;
+  	padding: 5px;
+  	background: #fff;
+  	border-radius: 5px;
+}
+
+input[type="text"]:-moz-read-only{
+  	border-color: #ccc;
+}
+input[type="text"]:read-only{
+  	border-color: #ccc;
+}
+```
+
+结果为：
+
+![readonly](readonly.png)
+
+### :read-write 选择器
+
+`:read-write`选择器刚好与`:read-only`选择器相反，主要用来指定当元素处于`非只读状态`时的样式。
+
+示例：
+
+使用`:read-write`选择器来设置不是只读控件的文本框样式。
+
+```html
+<form action="#">
+  	<div>
+    	<label for="name">姓名:</label>
+    	<input type="text" name="name" id="name" placeholder="大漠" />
+  	</div>
+  	<div>
+    	<label for="address">地址:</label>
+    	<input type="text" name="address" id="address" placeholder="中国上海" readonly="readonly" />
+  	</div>
+</form>
+```
+
+css代码：
+
+```css
+form {
+  	width: 300px;
+  	padding: 10px;
+  	border: 1px solid #ccc;
+  	margin: 50px auto;
+}
+form > div {
+  	margin-bottom: 10px;
+}
+
+input[type="text"]{
+  	border: 1px solid orange;
+  	padding: 5px;
+  	background: #fff;
+  	border-radius: 5px;
+}
+
+input[type="text"]:-moz-read-only{
+  	border-color: #ccc;
+}
+input[type="text"]:read-only{
+  	border-color: #ccc;
+}
+
+input[type="text"]:-moz-read-write{
+  	border-color: #f36;
+}
+input[type="text"]:read-write{
+  	border-color: #f36;
+}
+```
+
+效果为：
+
+![read-write](./read-write.png)
+
+### ::before和::after
+
+`::before`和`::after`这两个主要用来给元素的前面或后面插入内容，这两个常和`content`配合使用，使用的场景最多的就是清除浮动。
+
+```css
+.clearfix::before,
+.clearfix::after {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	zoom: 1;
+}
+```
 
