@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Callback function</title>
+</head>
+
+<body>
+    <button onClick="test()">click me</button>
+    <button onClick="test2()">click me</button>
+    <script language="javascript" type="text/javascript">
+    // demo1:
+    function main(callback) {
+        console.log("I am main function");
+        console.log("Invoke callback function..");
+        callback();
+    }
+
+    function b() {
+        console.log("I am callback function: b");
+    }
+
+    function c() {
+        console.log("I am callback function: c");
+    }
+
+    function test() {
+        main(b);
+        main(c);
+    }
+
+    // demo2:
+    function f1(callback) {
+        setTimeout(function() {
+            // f1的任务代码
+            console.log('I am come from function:f1');
+            callback();
+        }, 1000);
+    }
+
+    function f2() {
+        console.log('I am come from function:f2');
+    }
+
+    function test2() {
+        f1(f2);
+    }
+
+    // demo3
+    function mySandwich(param1, param2, callback) {
+        console.log('Started eating my sandwich.\n\nIt has: ' + param1 + ', ' + param2);
+        if (callback && typeof(callback) === "function") {
+            callback();
+        }
+    }
+
+    mySandwich('ham', 'cheese', function() {
+        console.log('Finished eating my sandwich.');
+    });
+    </script>
+</body>
+
+</html>

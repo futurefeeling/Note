@@ -1298,3 +1298,218 @@ input[type="text"]:read-write{
 }
 ```
 
+## 变形与动画（上）
+
+### 旋转 rotate()
+
+旋转`rotate()`函数通过指定的角度参数使元素相对原点进行旋转。它主要在二维空间内进行操作，设置一个角度值，用来指定旋转的幅度。如果这个值为正值，元素相对原点中心顺时针旋转；如果这个值为负值，元素相对原点中心逆时针旋转。
+
+示例：
+
+HTML代码：
+
+```html
+<div class="wrapper">
+	<div></div>
+</div>
+```
+
+CSS代码：
+
+```css
+.wrapper {
+	width: 200px;
+	height: 200px;
+	border: 1px dotted red;
+	margin: 100px auto;
+}
+.wrapper div {
+	width: 200px;
+	height: 200px;
+	background: orange;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+```
+
+结果：
+
+![rotate](./rotate.png)
+
+### 扭曲 skew()
+
+扭曲`skew()`函数能够让元素倾斜显示。它可以将一个对象以其中心位置围绕着`X轴`和`Y轴`按照一定的角度倾斜。这与`rotate()`函数的旋转不同，`rotate()`函数只是旋转，而不会改变元素的形状。`skew()`函数不会旋转，而只会改变元素的形状。
+
+> **Skew()** 具有三种情况：
+
+1. skew(x,y)使元素在水平和垂直方向同时扭曲（X轴和Y轴同时按一定的角度值进行扭曲变形）；
+	
+	效果示例：
+	
+	![skew(x,y)](./skew(x,y).png)
+	
+2. skewX(x)仅使元素在水平方向扭曲变形（X轴扭曲变形）；
+
+	效果示例：
+	
+	![skewX(x)](skewX(x).png)
+	
+3. skewY(y)仅使元素在垂直方向扭曲变形（Y轴扭曲变形）。
+
+	效果示例：
+	
+	![skewY(y)](skewY(y).png)
+
+示例：
+
+HTML代码：
+
+```html
+<div class="wrapper">
+	<div>我变成平行四边形</div>
+</div>
+```
+
+CSS代码
+
+```css
+.wrapper {
+	width: 300px;
+	height: 100px;
+	border: 2px dotted red;
+	margin: 30px auto;
+}
+.wrapper div {
+	width: 300px;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	background: orange;
+	-webkit-transform: skew(45deg);
+	-moz-transform: skew(45deg);
+	transform: skew(45deg);
+}
+```
+
+结果：
+
+![skew](skew.png)
+
+### 缩放 scale()
+
+`缩放 scale()函数` 让元素根据中心原点对对象进行缩放。
+
+缩放`scale`具有三种情况：
+
+1. `scale(X,Y)`使元素水平方向和垂直方向同时缩放（也就是`X轴`和`Y轴`同时缩放）
+
+	![scale(x,y)](./scale(x,y).png)
+	
+	代码示例：
+	
+	```css
+	div:hover {
+		-webkit-transform: scale(1.5, 0.5);
+		-moz-transform: scale(1.5, 0.5);
+		transform: scale(1.5, 0.5);
+	}
+	```
+	
+	> 注意：Y是一个可选参数，如果没有设置Y值，则表示X，Y两个方向的缩放倍数是一样的。
+	
+2. `scaleX(x)`元素仅水平方向缩放（X轴缩放）
+
+	![scale(x)](./scale(x).png)
+	
+3. `scaleY(y)`元素仅垂直方向缩放（Y轴缩放）
+
+	![scale(y)](./scale(y).png)
+
+HTML代码：
+
+```html
+<div class="warpper">
+	<div>我将放大1.5倍</div>
+</div>
+```
+
+CSS代码：
+
+```css
+.wrapper {
+  width: 200px;
+  height: 200px;
+  border:2px dashed red;
+  margin: 100px auto;
+}
+.wrapper div {
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  background: orange;
+  text-align: center;
+  color: #fff;
+}
+.wrapper div:hover {
+  opacity: .5;
+  -webkit-transform: scale(1.5);
+  -moz-transform:scale(1.5)
+  transform: scale(1.5);
+}
+```
+
+结果：
+
+![scale](./scale.png)
+
+> **Pay Attention**:
+> `scale()`的取值默认的值为1，当值设置为0.01到0.99之间的任何值，作用使一个元素缩小；而任何大于或等于1.01的值，作用是让元素放大。
+
+
+### 位移 translate()
+
+`translate()函数`可以将元素向指定的方向移动，类似于`position`中的`relative`。或以简单的理解为，使用`translate()函数`，可以把元素从原来的位置移动，而不影响在`X`、`Y`轴上的任何Web组件。
+
+`translate`我们分为三种情况：
+
+1. `translate(x,y)`水平方向和垂直方向同时移动（也就是X轴和Y轴同时移动）
+
+2. `translateX(x)`仅水平方向移动（X轴移动）
+
+3. `translateY(Y)`仅垂直方向移动（Y轴移动）
+
+实例演示：通过translate()函数将元素向Y轴下方移动50px,X轴右方移动100px。
+
+HTML代码：
+
+```html
+<div class="wrapper">
+	<div>我向右向下移动</div>
+</div>
+```
+
+CSS代码：
+
+```css
+.wrapper {
+  	width: 200px;
+  	height: 200px;
+  	border: 2px dotted red;
+  	margin: 20px auto;
+}
+.wrapper div {
+  	width: 200px;
+  	height: 200px;
+  	line-height: 200px;
+  	text-align: center;
+  	background: orange;
+  	color: #fff;
+  	-webkit-transform: translate(50px,100px);
+  	-moz-transform:translate(50px,100px);
+  	transform: translate(50px,100px);
+}
+```
+
+演示结果
+
+### 矩阵 matrix()
