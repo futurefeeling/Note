@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script type="text/javascript">
+function loginModalCons() {
+    var loginModalE = document.createElement('div');
+    loginModalE.setAttribute('class', 'modal fade');
+    loginModalE.setAttribute('id', 'loginModal');
+    loginModalE.setAttribute('tabindex', '-1');
+    loginModalE.setAttribute('aria-labelledby', 'login');
+    loginModalE.setAttribute('aria-hidden', 'true');
+
+    var modalCookaE = document.createElement('div');
+    modalCookaE.setAttribute('class', 'modal-dialog modal-cooka');
+
+    var modalContentE = document.createElement('div');
+    modalContentE.setAttribute('class', 'modal-content');
+
+    var modalHeaderE = document.createElement('div');
+    modalHeaderE.setAttribute('class', 'modal-header');
+    
+    var btnCloseE = document.createElement('button');
+    btnCloseE.setAttribute('type', 'button');
+    btnCloseE.setAttribute('class', 'close');
+    btnCloseE.setAttribute('data-dismiss', 'modal');
+    btnCloseE.setAttribute('aria-label', 'Close');
+
+    var timesE = document.createElement('span');
+    timesE.setAttribute('aria-hidden', 'true');
+    timesE.appendChild(document.createTextNode('\&times;'));
+
+    btnCloseE.appendChild(timesE);
+    modalHeaderE.appendChild(btnCloseE);
+
+    var hFiveE = document.createElement('h5');
+    hFiveE.setAttribute('class', 'modal-title');
+    hFiveE.appendChild(document.createTextNode('You have not logged in'));
+
+    var modalBodyE = document.createElement('div');
+    modalBodyE.setAttribute('class', 'modal-body');
+
+    var containerFluidE = document.createElement('div');
+    containerFluidE.setAttribute('class', 'container-fluid');
+
+    var rowE = document.createElement('div');
+    rowE.setAttribute('class', 'row');
+
+    var mdTwelveE = document.createElement('div');
+    mdTwelveE.setAttribute('class', 'col-md-12');
+
+    var formHeadE = document.createElement('div');
+    formHeadE.setAttribute('class', 'form-head');
+
+    var imgE = document.createElement('img');
+    imgE.setAttribute('src', '/images/apple-touch-icon.png');
+    imgE.setAttribute('class', 'img-responsive center-block img-circle img-cooka-logo');
+
+    var form = document.createElement('form');
+    form.setAttribute('id', 'toLoginForm');
+    form.setAttribute('method', 'post');
+    form.setAttribute('class', 'form-horizontal');
+
+    var formGroupE = document.createElement('div');
+    formGroupE.setAttribute('class', 'form-group');
+
+    var inputGroup = document.createElement('div');
+    inputGroup.setAttribute('class', 'input-group');
+
+    var inputGroupAddon = document.createElement('div');
+    inputGroupAddon.setAttribute('class', 'input-group-addon');
+
+    var glyphiconE = document.createElement('span');
+    glyphiconE.setAttribute('class', 'glyphicon');
+    inputGroupAddon.appendChild(glyphiconE);
+
+    var inputE = document.createElement('input');
+    inputE.setAttribute('class', 'form-control');
+
+    var emailInputGroupAddon = inputGroup.appendChild(inputGroupAddon);
+    var emailInputGroup = mdTwelveE.appendChild(inputGroup);
+    var emailFiled = formGroupE.appendChild(mdTwelveE);
+    console.log(emailFiled);
+
+    modalContentE.appendChild(modalHeaderE);
+    modalCookaE.appendChild(modalContentE);
+    loginModalE.appendChild(modalCookaE);
+
+    console.log(loginModalE);
+}
+
+loginModalCons();
+</script>
+
+<body>
+    <!-- load login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+        <div class="modal-dialog modal-cooka">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title">You have not logged in</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-head">
+                                    <img src="/images/apple-touch-icon.png" class="img-responsive center-block img-circle img-cooka-logo">
+                                </div>
+                                <form id="toLoginForm" method="post" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                                                <input type="text" class="form-control f-email" name="email" placeholder="Email" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                                                <input type="password" class="form-control f-password" name="password" placeholder="Password" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-feedback hide" id="captcha-block">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></div>
+                                                <input type="text" class="form-control f-captcha" name="captcha" placeholder="Captcha" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="img-location" style="width:100px; height:34px; background: #ccc">
+                                                <img src="" id="captchaImage" />
+                                            </div>
+                                            <a href="#" class="link-fresh-captcha"><span class="glyphicon glyphicon-refresh refresh-captcha" title="Refresh the captcha"></span></a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-xs-6">
+                                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                                        </div>
+                                        <div class="col-md-6 col-xs-6">
+                                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="forget-paswd-link text-center">
+                                    <a href="/cooka-user-web/forgetpaswd.htm">Forget password</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1218,7 +1218,7 @@ input[type="text"]:read-only{
 
 ![readonly](readonly.png)
 
-### :read-write 选择器
+### 7.6 :read-write 选择器
 
 `:read-write`选择器刚好与`:read-only`选择器相反，主要用来指定当元素处于`非只读状态`时的样式。
 
@@ -1278,7 +1278,7 @@ input[type="text"]:read-write{
 
 ![read-write](./read-write.png)
 
-### ::before和::after
+### 7.7 ::before和::after
 
 `::before`和`::after`这两个主要用来给元素的前面或后面插入内容，这两个常和`content`配合使用，使用的场景最多的就是清除浮动。
 
@@ -1300,7 +1300,7 @@ input[type="text"]:read-write{
 
 ## 变形与动画（上）
 
-### 旋转 rotate()
+### 8.1 旋转 rotate()
 
 旋转`rotate()`函数通过指定的角度参数使元素相对原点进行旋转。它主要在二维空间内进行操作，设置一个角度值，用来指定旋转的幅度。如果这个值为正值，元素相对原点中心顺时针旋转；如果这个值为负值，元素相对原点中心逆时针旋转。
 
@@ -1336,7 +1336,7 @@ CSS代码：
 
 ![rotate](./rotate.png)
 
-### 扭曲 skew()
+### 8.2 扭曲 skew()
 
 扭曲`skew()`函数能够让元素倾斜显示。它可以将一个对象以其中心位置围绕着`X轴`和`Y轴`按照一定的角度倾斜。这与`rotate()`函数的旋转不同，`rotate()`函数只是旋转，而不会改变元素的形状。`skew()`函数不会旋转，而只会改变元素的形状。
 
@@ -1395,7 +1395,7 @@ CSS代码
 
 ![skew](skew.png)
 
-### 缩放 scale()
+### 8.3 缩放 scale()
 
 `缩放 scale()函数` 让元素根据中心原点对对象进行缩放。
 
@@ -1466,7 +1466,7 @@ CSS代码：
 > `scale()`的取值默认的值为1，当值设置为0.01到0.99之间的任何值，作用使一个元素缩小；而任何大于或等于1.01的值，作用是让元素放大。
 
 
-### 位移 translate()
+### 8.4 位移 translate()
 
 `translate()函数`可以将元素向指定的方向移动，类似于`position`中的`relative`。或以简单的理解为，使用`translate()函数`，可以把元素从原来的位置移动，而不影响在`X`、`Y`轴上的任何Web组件。
 
@@ -1474,9 +1474,15 @@ CSS代码：
 
 1. `translate(x,y)`水平方向和垂直方向同时移动（也就是X轴和Y轴同时移动）
 
+	![translate(x,y)](./translate(x,y).png)
+
 2. `translateX(x)`仅水平方向移动（X轴移动）
 
+	![translateX](./translateX.png)
+
 3. `translateY(Y)`仅垂直方向移动（Y轴移动）
+
+	![translateY](./translateY.png)
 
 实例演示：通过translate()函数将元素向Y轴下方移动50px,X轴右方移动100px。
 
@@ -1512,4 +1518,579 @@ CSS代码：
 
 演示结果
 
-### 矩阵 matrix()
+![translate](./translate.png)
+
+### 8.5 矩阵 matrix()
+
+`matrix()` 是一个含六个值的`(a,b,c,d,e,f)`变换矩阵，用来指定一个2D变换，相当于直接应用一个`[a b c d e f]`变换矩阵。就是基于水平方向（X轴）和垂直方向（Y轴）重新定位元素,此属性值使用涉及到数学中的矩阵，我在这里只是简单的说一下CSS3中的`transform`有这么一个属性值，如果需要深入了解，需要对数学矩阵有一定的知识。
+
+示例：通过matrix()函数来模拟transform中translate()位移的效果。
+
+HTML代码：
+
+```html
+<div class="wrapper">
+  	<div></div>
+</div>
+```
+
+CSS代码：
+
+```css
+.wrapper {
+  	width: 300px;
+  	height: 200px;
+  	border: 2px dotted red;
+  	margin: 40px auto;
+}
+.wrapper div {
+  	width:300px;
+  	height: 200px;
+  	background: orange;
+  	-webkit-transform: matrix(1,0,0,1,50,50);
+  	-moz-transform:matrix(1,0,0,1,50,50);
+  	transform: matrix(1,0,0,1,50,50);
+}
+```
+
+演示结果：
+
+![matrix](./matrix.png)
+
+### 8.6 原点 transform-origin
+
+任何一个元素都有一个中心点，默认情况之下，其中心点是居于元素X轴和Y轴的50%处。如下图所示：
+
+![originCenter](./originCenter.png)
+
+在没有重置`transform-origin`改变元素原点位置的情况下，CSS变形进行的旋转、位移、缩放，扭曲等操作都是以元素自己中心位置进行变形。但很多时候，我们可以通过`transform-origin`来对元素进行原点位置改变，使元素原点不在元素的中心位置，以达到需要的原点位置。
+`transform-origin`取值和元素设置背景中的`background-position`取值类似，如下表所示：
+
+![originPosition](./originPosition.png)
+
+示例展示：
+
+通过`transform-origin`改变元素原点到左上角，然后进行顺时旋转45度。
+
+HTML代码：
+
+```html
+<div class="wrapper">
+  <div>原点在默认位置处</div>
+</div>
+<div class="wrapper transform-origin">
+  <div>原点重置到左上角</div>
+</div>
+```
+
+CSS代码：
+
+```css
+.wrapper {
+  	width: 300px;
+  	height: 300px;
+  	float: left;
+  	margin: 100px;
+  	border: 2px dotted red;
+  	line-height: 300px;
+  	text-align: center;
+}
+.wrapper div {
+  	background: orange;
+  	-webkit-transform: rotate(45deg);
+  	transform: rotate(45deg);
+}
+.transform-origin div {
+  	-webkit-transform-origin: left top;
+	transform-origin: left top;
+}
+```
+
+演示结果：
+
+![origin](./origin.png)
+
+### 8.7 过渡属性 transition-property
+
+早期在Web中要实现动画效果，都是依赖于JavaScript或Flash来完成。但在CSS3中新增加了一个新的模块`transition`，它可以通过一些简单的CSS事件来触发元素的外观变化，让效果显得更加细腻。简单点说，就是通过鼠标的单击、获得焦点，被点击或对元素任何改变中触发，并平滑地以动画效果改变CSS的属性值。
+
+在CSS中创建简单的过渡效果可以从以下几个步骤来实现：
+
+1. 在默认样式中声明元素的初始状态样式；
+2. 声明过渡元素最终状态样式，比如悬浮状态；
+3. 在默认样式中通过添加过渡函数，添加一些不同的样式。
+
+CSS3的过度`transition`属性是一个复合属性，主要包括以下几个子属性：
+
+* `transition-property`:指定过渡或动态模拟的CSS属性
+* `transition-duration`:指定完成过渡所需的时间
+* `transition-timing-function`:指定过渡函数
+* `transition-delay`:指定开始出现的延迟时间
+
+> `transition-property`属性分析：
+
+`transition-property`用来指定过渡动画的CSS属性名称，而这个过渡属性只有具备一个中点值的属性（需要产生动画的属性）才能具备过渡效果，其对应具有过渡的CSS属性主要有：
+
+![hasTransitionProperty](./hasTransitionProperty.png)
+
+HTML:
+
+```html
+<div></div>
+```
+pr
+CSS:
+
+```css
+div {
+	width: 200px;
+  	height: 200px;
+  	background-color:red;
+  	margin: 20px auto;
+  	-webkit-transition: background-color .5s ease .1s;
+  	transition: background-color .5s ease .1s;
+}
+div:hover {
+  	background-color: orange;
+}
+```
+
+演示结果:
+
+鼠标移入:
+
+![propertyMouseOver](./propertyMouseOver.png)
+
+鼠标移出
+
+![propertyMouseOut](./propertyMouseOut.png)
+
+> **特别注意**：当`transition-property`属性设置为`all`时，表示的是所有中点值的属性。
+
+用一个简单的例子来说明这个问题：
+
+假设你的初始状态设置了样式`width`,`height`,`background`,当你在终始状态都改变了这三个属性，那么`all`代表的就是`width`、`height`和`background`。如果你的终始状态只改变了`width`和`height`时，那么`all`代表的就是`width`和`height`。
+
+### 8.8 过渡时间 transition-duration
+
+`transition-duration`属性主要用来设置一个属性过渡到另一个属性所需的时间，也就是从旧属性过渡到新属性花费的时间长度，俗称持续时间。
+
+案例演示：
+
+在鼠标悬停（hover）状态下，让容器从直角慢慢过渡到圆角，并让整个动画持续0.5s。
+
+HTML:
+
+```html
+<div></div>
+```
+
+CSS:
+
+```css
+div {
+  	width: 300px;
+  	height: 200px;
+  	background-color: orange;
+  	margin: 20px auto;
+  	-webkit-transition-property: -webkit-border-radius;
+  	transition-property: border-radius;
+  	-webkit-transition-duration: .5s;
+  	transition-duration: .5s;
+  	-webkit-transition-timing-function: ease-out;
+  	transition-timing-function: ease-out;
+  	-webkit-transition-delay: .2s;
+  	transition-delay: .2s;
+}	
+div:hover {
+  	border-radius: 20px;
+}
+```
+
+演示结果：
+
+鼠标移入
+
+![duration-mouseover](./duration-mouseover.png)
+
+鼠标移出
+
+![duration-mouseout](./duration-mouseout.png)
+
+### 8.9 过渡函数 transition-timing-function
+
+`transition-timing-function`属性指的是过渡的`缓动函数`。主要用来指定浏览器的过渡速度，以及过渡期间的操作进展情况，其中要包括以下几种函数:
+
+![transition-timing-function](./transition-timing-function.png)
+
+> 案例展示：
+
+在`hover`状态下，让容器从一个正方形慢慢过渡到一个圆形，而整个过渡是先加速再减速，也就是运用`ease-in-out`函数。
+
+HTML代码:
+
+```html
+<div></div>
+```
+
+CSS代码:
+
+```css
+div {
+  	width: 200px;
+  	height: 200px;
+  	background: red;
+  	margin: 20px auto;
+  	-webkit-transition-property: -webkit-border-radius;
+  	transition-property: border-radius;
+  	-webkit-transition-duration: .5s;
+  	transition-duration: .5s;
+  	-webkit-transition-timing-function: ease-in-out;
+  	transition-timing-function: ease-in-out;
+  	-webkit-transition-delay: .2s;
+  	transition-delay: .2s;
+}
+div:hover {
+  	border-radius: 100%;
+}
+```
+
+> 演示结果
+
+鼠标移入：
+
+![timing-mouseover](./timing-mouseover.png)
+
+鼠标移出：
+
+![timing-mouseout](./timing-mouseout.png)
+
+### 8.10 过渡延迟时间 transition-delay
+
+`transition-delay`属性和`transition-duration`属性极其类似，不同的是`transition-duration`是用来设置过渡动画的持续时间，而`transition-delay`主要用来指定一个动画开始执行的时间，也就是说当改变元素属性值后多长时间开始执行。
+
+有时我们想改变两个或者多个css属性的`transition`效果时，只要把几个`transition`的声明串在一起，用逗号`，`隔开，然后各自可以有各自不同的延续时间和其时间的速率变换方式。**但需要值得注意的一点：第一个时间的值为 `transition-duration`，第二个为`transition-delay`。**
+
+例如：`a {transition: background 0.8s ease-in 0.3, color 0.6s ease-out 0.3s}`
+
+> 示例：
+
+通过`transition`属性将一个`200px *200px`的橙色容器，在鼠标悬浮状态时，过渡到一个`300px * 300px`的红色容器。而且整个过渡`0.1s`后触发，并且整个过渡持续`0.28s`。
+
+HTML代码:
+
+```html
+<div class="wrapper">
+  	<div>鼠标放到我的身上来</div>
+</div>
+```
+
+CSS代码:
+
+```css
+.wrapper {
+  	width: 400px;
+  	height: 400px;
+  	margin: 20px auto;
+  	border: 2px dotted red;
+}
+.wrapper div {
+  	width: 200px;
+  	height: 200px;
+  	background-color: orange;
+  	-webkit-transition: all .28s ease-in .1s;
+  	transition: all .28s ease-in .1s;
+}
+.wrapper div:hover {
+  	width: 300px;
+  	height: 300px;
+  	background-color: red;
+}
+```
+
+> 演示结果
+
+鼠标移入：
+
+![delay-mouseover](./delay-mouseover.png)
+
+鼠标移出：
+
+![delay-mouseout](./delay-mouseout.png)
+
+## 变形与动画（下）
+
+### 9.1 初识 Keyframes
+
+`Keyframes`被称为关键帧，其类似于`Flash`中的关键帧。在CSS3中其主要以`@keyframes`开头，后面紧跟着是动画名称加上一对花括号`{…}`，括号中就是一些不同时间段样式规则。
+
+```css
+@keyframes changecolor{
+  	0%{
+   		background: red;
+  	}
+  	100%{
+    	background: green;
+  	}
+}
+```
+
+在一个`@keyframes`中的样式规则可以由多个百分比构成的，如在`0%`到`100%`之间创建更多个百分比，分别给每个百分比中给需要有动画效果的元素加上不同的样式，从而达到一种在不断变化的效果。
+
+> **经验与技巧**：
+
+在`@keyframes`中定义动画名称时，其中`0%`和`100%`还可以使用关键词`from`和`to`来代表，其中`0%`对应的是`from`，`100%`对应的是`to`。
+
+> 浏览器的支持情况：
+
+![keyframes-support](./keyframes-support.jpg)
+
+`Chrome` 和 `Safari` 需要前缀 `-webkit-`；`Foxfire` 需要前缀 `-moz-`。
+
+> 案例演示
+
+通过`@keyframes`声明一个名叫`wobble`的动画，从`0%`开始到`100%`结束，同时还经历了一个`40%`和`60%`两个过程。`wobble`动画在`0%`时元素定位到`left`为`100px`，背景色为`green`，然后在`40%`时元素过渡到`left`为`150px`,背景色为`orange`,接着在`60%`时元素过渡到`left`为`75px`，背景色为`blue`，最后`100%`时结束动画，元素又回到起点`left`为`100px`处，背景色变为`red`。
+
+HTML:
+
+```html
+<div>鼠标放到我身上</div>
+```
+
+CSS:
+
+```css
+@keyframes wobble {
+  	0% {
+    	margin-left: 100px;
+    	background:green;
+  	}
+  	40% {
+    	margin-left:150px;
+    	background:orange;
+  	}
+  	60% {
+    	margin-left: 75px;
+    	background: blue;
+  	}
+  	100% {
+    	margin-left: 100px;
+    	background: red;
+  	}
+}
+div {
+  	width: 100px;
+  	height: 100px;
+  	background:red;
+  	color: #fff;
+}
+div:hover{
+  	animation: wobble 5s ease .1s;
+}
+```
+
+### 9.2 调用动画
+
+`animation-name`属性主要是用来调用 `@keyframes` 定义好的动画。需要特别注意: `animation-name` 调用的动画名需要和`@keyframes`定义的动画名称完全一致（区分大小写），如果不一致将不具有任何动画效果。
+
+> 语法：
+
+```css
+animation-name: none | IDENT[,none|DENT]*;
+```
+
+1. `IDENT`是由 `@keyframes` 创建的动画名，上面已经讲过了（`animation-name` 调用的动画名需要和`@keyframes`定义的动画名称完全一致）；
+2. `none`为默认值，当值为 `none` 时，将没有任何动画效果,这可以用于覆盖任何动画。
+
+> **注意**：
+
+需要在 Chrome 和 Safari 上面的基础上加上`-webkit-`前缀，Firefox加上`-moz-`。
+
+### 9.3 设置动画播放时间 animation-duration
+
+`animation-duration`主要用来设置CSS3动画播放时间，其使用方法和`transition-duration`类似，是用来指定元素播放动画所持续的时间长，也就是完成从`0%`到`100%`一次动画所需时间。单位：`S秒`
+
+> 语法规则
+
+```css
+animation-duration: <time>[,<time>]*
+```
+
+取值`<time>`为数值，单位为`秒`，其默认值为`0`，这意味着动画周期为`0`，也就是没有动画效果（如果值为负值会被视为`0`）。
+
+> 案例演示：
+
+制作一个矩形变成圆形的动画，整个动画播放时间持续了`10s`钟。
+
+HTML:
+
+```html
+<div>Hover Me</div>
+```
+
+CSS:
+
+```css
+@keyframes toradius{
+  	from {
+    	border-radius: 0;
+  	}
+  	to {
+    	border-radius: 100%;
+  	}
+}
+div {
+  	width: 200px;
+  	height: 200px;
+  	line-height: 200px;
+  	text-align: center;
+  	color: #fff;
+  	background: green;
+  	margin: 20px auto;
+}
+div:hover {
+  	animation-name: toradius;
+  	animation-duration: 10s;
+  	animation-timing-function: ease-in-out;
+  	animation-delay: .1s;
+}
+```
+
+鼠标移入
+
+![animation-duration-mouseover](./animation-duration-mouseover.png)
+
+鼠标移出
+
+![animation-duration-mouseout](./animaiton-duration-mouseout.png)
+
+### 9.4 设置播放方式 animation-timing-function
+
+`animation-timing-function`属性主要用来设置动画播放方式。主要让元素根据时间的推进来改变属性值的变换速率，简单点说就是动画的播放方式。
+
+> 语法规则：
+
+```css
+animation-timing-function:ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) [, ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)]*
+```
+
+它和`transition`中的`transition-timing-function`一样，具有以下几种变换方式：`ease`,`ease-in`,`ease-in-out`,`ease-out`,`linear`和`cubic-bezier`。对应功如下：
+
+![animation-timing-function](./animation-timing-function.png)
+
+### 9.5 设置动画开始播放时间 animation-delay
+
+`animation-delay`属性用来定义动画开始播放的时间，用来触发动画播放的时间点。和`transition-delay`属性一样，用于定义在浏览器开始执行动画之前等待的时间。
+
+> 语法规则：
+
+```css
+animation-delay:<time>[,<time>]*
+```
+
+> 案例演示：    
+
+浏览器渲染样式之后2S之后触发move动画。
+
+HTML:
+
+```html
+<div><span></span></div>
+```
+
+CSS:
+
+```css
+@keyframes move {
+  	0%{
+    	transform: translate(0);
+  	}
+  	15%{
+    	transform: translate(100px,180px);
+  	}
+  	30%{
+    	transform: translate(150px,0);
+  	}
+  	45%{
+    	transform: translate(250px,180px);
+  	}
+  	60%{
+    	transform:translate(300px,0);
+  	}
+  	75%{
+    	transform: translate(450px,180px);
+  	}
+  	100%{
+    	transfrom: translate(480px,0);
+  	}
+}
+div {
+  	width: 500px;
+  	height: 200px;
+  	border: 1px solid red;
+  	margin: 20px auto;
+}
+div span {
+  	display: inline-block;
+  	width: 20px;
+  	height: 20px;
+  	background: green;
+  	border-radius: 100%;
+  	animation-name:move;
+  	animation-duration: 10s;
+  	animation-timing-function:ease;
+  	animation-delay:2s;
+  	animation-iteration-count:infinite;
+}
+```
+
+> 效果：
+
+![animation-delay](animation-delay.gif)
+
+### 9.6 设置动画播放次数 animation-iteration-count
+
+animation-iteration-count属性主要用来定义动画的播放次数。
+
+> 语法规则：
+
+```css
+animation-iteration-count: infinite | <number> [, infinite | <number>]*
+```
+
+1. 其值通常为整数，但也可以使用带有小数的数字，其默认值为1，这意味着动画将从开始到结束只播放一次。
+2. 如果取值为infinite，动画将会无限次的播放。
+
+> 举例：
+
+通过animation-iteration-count属性让动画move只播放5次，代码设置为：
+
+```css
+animation-iteration-count:5;
+```
+
+> 注意：
+
+Chrome或Safari浏览器，需要加入`-webkit-`前缀！
+
+### 9.7 设置动画播放方向 animation-direction
+
+`animation-direction`属性主要用来设置动画播放方向，其语法规则如下：
+
+```css
+animation-direction:normal | alternate [, normal | alternate]*
+```
+
+其主要有两个值：`normal`、`alternate`
+
+1. normal是默认值，如果设置为normal时，动画的每次循环都是向前播放；
+
+2. 另一个值是alternate，他的作用是，动画播放在第偶数次向前播放，第奇数次向反方向播放。
+
+> 例如：
+
+通过`animation-direction`属性，将`move`动画播放动画方向设置为`alternate`，代码为：
+
+```css
+animation-direction:alternate;
+```
